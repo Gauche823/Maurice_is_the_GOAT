@@ -1,8 +1,52 @@
 ---
 layout: default
 ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Cursor</title>
+  <style>
+    /* Hide the default cursor */
+    body {
+      cursor: none;
+    }
 
-<strong>hello word</strong>
+    /* Create a custom cursor */
+    .custom-cursor {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="custom-cursor" id="cursor"></div>
 
-<button onclick="alert('Button clicked!')">Click Me</button>
+  <script>
+    const cursor = document.getElementById('cursor');
 
+    // Update cursor position
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = `${e.clientX}px`;
+      cursor.style.top = `${e.clientY}px`;
+    });
+
+    // Optional: Add hover effect for interactive elements
+    document.querySelectorAll('a, button').forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'scale(1.5) translate(-50%, -50%)';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'scale(1) translate(-50%, -50%)';
+      });
+    });
+  </script>
+</body>
+</html>
